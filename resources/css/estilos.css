@@ -1,0 +1,39 @@
+/*#root {	
+	-fx-background-color: pink;
+} */
+
+.text-field {
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+}
+
+.table-view .placeholder {
+	-fx-background-color: white;
+	
+	}
+
+.table-view {
+	-fx-background-color: violet;
+	-fx-border-color: violet;
+}
+
+.table-view .column-header {
+	-fx-background-color: violet;
+	-fx-border-color: violet;
+}
+
+.table-row-cell {
+	-fx-background-color: Pink !important;
+	-fx-border-color: violet;
+}
+
+.table-row-cell:odd {
+	-fx-background-color: LavenderBlush !important;
+}
+
+.button {
+	-fx-background-color: violet;
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+	
+}
