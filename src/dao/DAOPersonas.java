@@ -63,7 +63,9 @@ public class DAOPersonas {
 		}
 		return personas;
 	}
-	
+	/*
+ 	* NO TE OLVIDES DE COMENTAR TU CÓDIGO, NO MENOS PENDEJO.
+ 	*/
 	public static void anadirPersona(Persona... persona) throws SQLException {
 		if (persona != null) {			
 			String sql = "INSERT INTO Persona (nombre, apellidos, edad) values (?, ?, ?)";
