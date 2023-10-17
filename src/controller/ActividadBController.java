@@ -37,6 +37,8 @@ import javafx.stage.Stage;
 import model.Persona;
 
 public class ActividadBController implements Initializable {
+	
+	private ResourceBundle bundle;
 
     @FXML
     private Button btnAgregarPersona;
@@ -144,6 +146,7 @@ public class ActividadBController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.bundle = resources;
 		
 		columnaApellidos.setCellValueFactory(param -> {
 			Persona persona = param.getValue();
@@ -284,7 +287,7 @@ public class ActividadBController implements Initializable {
 		try {
 			Stage stage = new Stage();
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarPersona.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AgregarPersona.fxml"), bundle);
 			GridPane rootPersona = loader.load();
 			AgregarPersonaController controller = loader.getController();
 			controller.pasarTabla(tablaPersonas);

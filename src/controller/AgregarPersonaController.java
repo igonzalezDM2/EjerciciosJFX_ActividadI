@@ -4,10 +4,13 @@ import static dao.DAOPersonas.anadirPersona;
 import static dao.DAOPersonas.existe;
 import static dao.DAOPersonas.updatePersona;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,7 +21,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Persona;
 
-public class AgregarPersonaController {
+public class AgregarPersonaController implements Initializable{
+	
+	private ResourceBundle bundle;
 	
 	private Persona persona;
 	
@@ -81,7 +86,7 @@ public class AgregarPersonaController {
 				tabla.refresh();
 				return true;
 			} catch (SQLException e) {
-	    		Alert alert = new Alert(AlertType.ERROR, "No se pudo modificar la persona en la base de datos", ButtonType.OK);
+	    		Alert alert = new Alert(AlertType.ERROR, bundle.getString("cantEditPerson"), ButtonType.OK);
 	    		alert.showAndWait();
 			}
     	} else if (!existe(persona)) {    		
@@ -91,11 +96,11 @@ public class AgregarPersonaController {
 				tabla.refresh();
 				return true;
 			} catch (SQLException e) {
-	    		Alert alert = new Alert(AlertType.ERROR, "No se pudo añadir la persona a la base de datos", ButtonType.OK);
+	    		Alert alert = new Alert(AlertType.ERROR, bundle.getString("cantAddPerson"), ButtonType.OK);
 	    		alert.showAndWait();
 			}
     	} else {
-    		Alert alert = new Alert(AlertType.WARNING, "La persona está repetida", ButtonType.OK);
+    		Alert alert = new Alert(AlertType.WARNING, bundle.getString("repeatedPerson"), ButtonType.OK);
     		alert.showAndWait();
     	}
     	return false;
@@ -113,13 +118,13 @@ public class AgregarPersonaController {
     	StringBuilder sb = new StringBuilder();
     	
     	if (persona.getNombre() == null || persona.getNombre().isBlank()) {
-    		sb.append("El campo Nombre es obligatorio\n");
+    		sb.append(String.format(bundle.getString("mandatoryField") + "\n", bundle.getString("name")));
     	}
     	if (persona.getApellidos() == null || persona.getApellidos().isBlank()) {
-    		sb.append("El campo Apellidos es obligatorio\n");    		
+    		sb.append(String.format(bundle.getString("mandatoryField") + "\n", bundle.getString("surnames")));    		
     	}
     	if (persona.getEdad() < 0) {
-    		sb.append("El campo Edad es obligatorio\n");
+    		sb.append(String.format(bundle.getString("mandatoryField") + "\n", bundle.getString("age")));
     	}
     	
     	if (!sb.isEmpty()) {
@@ -138,6 +143,11 @@ public class AgregarPersonaController {
 		} catch (NullPointerException e1) {
 			return -1;
 		}
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		this.bundle = resources;
 	}
 
 }

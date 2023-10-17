@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import model.Persona;
@@ -30,9 +31,20 @@ public class DAOPersonas {
 		
 	}
 	
-	private static final String usuario = "root";
-	private static final String contrasena = "root";
-	private static final String baseDeDatos = "personas";
+	private static final ResourceBundle BUNDLE; 
+	private static final String USUARIO;
+	private static final String CONTRASENA;
+	private static final String BASE_DE_DATOS;
+	
+	static {
+		BUNDLE = ResourceBundle.getBundle("properties.database");
+		USUARIO = BUNDLE.getString("user");
+		CONTRASENA = BUNDLE.getString("password");
+		BASE_DE_DATOS = BUNDLE.getString("db");
+	}
+	
+	
+	
 	
 	/**
 	 * NO TE OLVIDES DE CERRAR LA CONEXIÓN, PENDEJO
@@ -40,7 +52,7 @@ public class DAOPersonas {
 	 * @throws SQLException
 	 */
 	public static Connection getConexion() throws SQLException {
-		return DriverManager.getConnection(String.format("jdbc:mariadb://localhost:3306/%s?user=%s&password=%s", baseDeDatos, usuario, contrasena));
+		return DriverManager.getConnection(String.format("jdbc:mariadb://localhost:3306/%s?user=%s&password=%s", BASE_DE_DATOS, USUARIO, CONTRASENA));
 	}
 	
 	public static List<Persona> getPersonas() {
@@ -102,7 +114,7 @@ public class DAOPersonas {
 	
 	public static Persona updatePersona(Persona persona, String nombre, String apellidos, int edad) throws SQLException {
 		String sql = "UPDATE Persona "
-				+ String.format("SET nombre = %s, apellidos = %s, edad = %d ", nombre, apellidos, edad)
+				+ String.format("SET nombre = \"%s\", apellidos = \"%s\", edad = %d ", nombre, apellidos, edad)
 				+ "where nombre = ? and apellidos = ? and edad = ?";
 		
 		try (Connection con = getConexion()) {

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -32,25 +33,34 @@
          <children>
             <TableView fx:id="tablaPersonas" onInputMethodTextChanged="#buscar" prefHeight="479.0" prefWidth="517.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
               <columns>
-                <TableColumn fx:id="columnaNombre" prefWidth="144.54596269130707" text="Nombre" />
-                <TableColumn fx:id="columnaApellidos" prefWidth="290.0010681152344" text="Apellidos" />
-                  <TableColumn fx:id="columnaEdad" prefWidth="146.3642578125" text="Edad" />
+                <TableColumn fx:id="columnaNombre" prefWidth="144.54596269130707" text="%name" />
+                <TableColumn fx:id="columnaApellidos" prefWidth="290.0010681152344" text="%surnames" />
+                  <TableColumn fx:id="columnaEdad" prefWidth="146.3642578125" text="%age" />
               </columns>
             </TableView>
             <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" style="-fx-hgap: 5em; -fx-vgap: 1em;" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <children>
-                  <Button fx:id="btnAgregarPersona" mnemonicParsing="false" onAction="#agregarPersona" text="Agregar Persona">
+                  <Button fx:id="btnAgregarPersona" mnemonicParsing="false" onAction="#agregarPersona" text="%addPerson">
                      <graphic>
                         <FontIcon iconLiteral="far-plus-square" />
-                     </graphic></Button>
-                  <Button fx:id="btnModificarPersona" mnemonicParsing="false" onAction="#modifcarPersona" text="Modifcar Persona">
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="%dontRepeat" />
+                     </tooltip></Button>
+                  <Button fx:id="btnModificarPersona" mnemonicParsing="false" onAction="#modifcarPersona" text="%modifyPerson">
                      <graphic>
                         <FontIcon iconLiteral="fas-edit" />
-                     </graphic></Button>
-                  <Button fx:id="btnEliminarPersona" mnemonicParsing="false" onAction="#eliminarPersona" text="Eliminar Persona">
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="%changeData" />
+                     </tooltip></Button>
+                  <Button fx:id="btnEliminarPersona" mnemonicParsing="false" onAction="#eliminarPersona" text="%deletePerson">
                      <graphic>
                         <FontIcon iconLiteral="far-times-circle" />
-                     </graphic></Button>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="%deleteFromDB" />
+                     </tooltip></Button>
                   <!-- <Button fx:id="btnImportar" mnemonicParsing="false" onAction="#importar" text="Importar" />
                   <Button fx:id="btnExportar" mnemonicParsing="false" onAction="#exportar" text="Exportar" /> -->
                </children>
@@ -65,7 +75,7 @@
                         <Image url="@../images/contactos.jpeg" />
                      </image>
                   </ImageView>
-                  <Label text="Filtrar por nombre:" />
+                  <Label text="%filter" />
                   <TextField fx:id="tfBusqueda" onKeyTyped="#buscar" />
                </children>
             </FlowPane>
